@@ -57,6 +57,7 @@ Command:\talign\tFASTQ->BAM
         self.aln_common(parser)
         parser.add_argument('-a', dest='algorithm', type=str, metavar='STR', choices=['bwa_aln', 'bwa_mem', 'speed_seq'], default='speed_seq', help='the method used for alignment\t[speed_seq]')
         parser.add_argument('-R', dest='RG',type=str, metavar='STR', help='read group header line such as "@RG\\tID:id\\tSM:sampleName\\tLB:lib\\tPL:ILLUMINA"[null]')
+	parser.add_argument('-f', dest='out_file', type=str, metavar='STR', help='the base name of the output BAM\t[out_bam]')
         parser.add_argument('FASTQ',nargs='+', help='input FASTQs')
         return parser
 
@@ -119,6 +120,8 @@ Command:\talign\tFASTQ->BAM
             paras['out_dir'] = args.out_dir
         paras['out_dir'] = os.path.abspath(paras['out_dir'] )
         if paras['out_dir'] [:-1] == '/': paras['out_dir']  = paras['out_dir'][0:-1]
+	if args.out_file is not None:
+	    paras['out_file'] = args.out_file
 
         ### Reference
         if args.ref is not None:

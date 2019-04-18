@@ -120,8 +120,6 @@ Command:\talign\tFASTQ->BAM
             paras['out_dir'] = args.out_dir
         paras['out_dir'] = os.path.abspath(paras['out_dir'] )
         if paras['out_dir'] [:-1] == '/': paras['out_dir']  = paras['out_dir'][0:-1]
-	if args.out_file is not None:
-	    paras['out_file'] = args.out_file
 
         ### Reference
         if args.ref is not None:
@@ -159,6 +157,9 @@ Command:\talign\tFASTQ->BAM
                 if not os.path.isfile(r):
                     print "ERROR: Cannot open FASTQ file: " + r
                     exit()
+			
+	    if args.out_file is not None:
+	        paras['out_file'] = args.out_file
 
         ### Realign and Call: for bam input
         if paras['command'] in ['realign']:
